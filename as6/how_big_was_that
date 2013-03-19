@@ -1,0 +1,7 @@
+total 93452596
+-rwxr-xr-x 1 sp13a10 kvm       11292 Feb 28 15:15 a.out*
+-rw-r--r-- 1 sp13a10 kvm         189 Feb 28 15:16 array.c
+-rw-r--r-- 1 sp13a10 kvm        1040 Feb 28 15:10 c_string.c
+-rw-r--r-- 1 sp13a10 kvm           0 Feb 28 15:22 how_big_was_that
+-rw-r--r-- 1 sp13a10 kvm         134 Feb 21 14:25 loopy.c
+-rw-r--r-- 1 sp13a10 kvm 95695421440 Feb 28 15:03 pal_count.txt
