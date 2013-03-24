@@ -25,49 +25,53 @@ typedef struct
 
 
 //function prototypes
-void fill_player(vector<Soccer_player> &guy, int n = 1);
-int big_switch(vector<Soccer_player> &team);
-void display(vector<Soccer_player>  &team);
-void display_sorted(vector<Soccer_player> team);
+void fill_player(Soccer_player **guy, int &size, int &max, int n = 1);
+int big_switch(Soccer_player **team, int &logical, int &max);
+void display(Soccer_player *team, int logical);
+void display_sorted(Soccer_player *team, int logical);
 int soc_cmp(const Soccer_player a, const Soccer_player b);
-void display_guy( Soccer_player *guy);
-void my_search(vector<Soccer_player> team);
-vector<Soccer_player> double_vec(vector<Soccer_player> &vec);
-
+void display_guy(Soccer_player *guy);
+void my_search(Soccer_player *team, int logical);
 
 
 int main()
 {
-  const int size = 10;
+  int size = 0, fill = 10, max = 10;
 
-  vector<Soccer_player> team(size);
+  Soccer_player *team = new Soccer_player[max];
 
-  fill_player(team, size);
+  fill_player(&team, size, max, fill);
   
-  while(big_switch(team))
+  while(big_switch(&team, size, max))
     ;
   
   return 0;
 }
 
-void fill_player(vector<Soccer_player> &guy, int n)
+void fill_player(Soccer_player **guy, int &size, int &max, int n)
 {
   cout << "Please enter last name, first name, birth month(1-12), birth date(1-31) ";
   cout << "and birth year seperated by spaces: " << endl;
 
-  for(int i = guy.size(); i < (n + guy.size()); i++) {
+  for(int i = size; i < (n + size); i++) {
     cout << "Person " << i + 1 << ": ";
 
-    if(n >= guy.size())
-      guy = double_vec(guy); //push empty guy in hopefully
+    if(i >= max){
+      Soccer_player *temp = new Soccer_player[max * 2];
+      for(int j = 0; j < max; j++)
+        temp[j] = (*guy)[j];
+      max *= 2;
+      *guy = temp;
+    }
 
-    cin >> guy[i].l_name >> guy[i].f_name >> guy[i].birth_month >> guy[i].birth_day
-        >> guy[i].birth_year;
+    cin >> (*guy)[i].l_name >> (*guy)[i].f_name >> (*guy)[i].birth_month >> (*guy)[i].birth_day
+        >> (*guy)[i].birth_year;
   }
 
+  size += n;
 }
 
-int big_switch(vector<Soccer_player> &team)
+int big_switch(Soccer_player **team, int &logical, int &max)
 {
   int choice;
 
@@ -80,19 +84,19 @@ int big_switch(vector<Soccer_player> &team)
 
   switch(choice) {
     case 1:
-      fill_player(team);
+      fill_player(team, logical, max);
       break;
     case 2:
-      display(team);
+      display(*team, logical);
       break;
     case 3:
       cout << "Trust me it was sorted..." << endl;
       break;
     case 4:
-      display_sorted(team);
+      display_sorted(*team, logical);
       break;
     case 5:
-      my_search(team);
+      my_search(*team, logical);
       break;
     case 6:
       return 0;
@@ -100,31 +104,34 @@ int big_switch(vector<Soccer_player> &team)
   return 1;
 }
 
-void display(vector<Soccer_player>  &team)
+void display(Soccer_player *team, int logical)
 {
-  for(int i = 0; i < team.size(); i++) {
+  for(int i = 0; i < logical; i++) {
     display_guy(&team[i]);
   }
 }
 
 
-void display_sorted(vector<Soccer_player> team)
+void display_sorted(Soccer_player *team, int logical)
 {
-  sort(team.begin(), team.end(), soc_cmp);
+  Soccer_player *temp = new Soccer_player[logical];
+  for(int i = 0; i < logical; i++)
+    temp[i] = team[i];
+  sort(temp, temp + logical, soc_cmp);
 
-  for(int i = 0; i < team.size(); i++) {
-    display_guy(&team[i]);
+  for(int i = 0; i < logical; i++) {
+    display_guy(&temp[i]);
   }
 }
 
 
 int soc_cmp(const Soccer_player a, const Soccer_player b)
 {
-  return a.l_name.compare(b.l_name);
+  return strcmp(&(a.l_name[0]), &(b.l_name[0]));
 }
 
 
-void my_search(vector<Soccer_player> team)
+void my_search(Soccer_player *team, int logical)
 {/*
   string temp;
   Soccer_player guy, *found = 0;//set to null
@@ -146,18 +153,10 @@ void my_search(vector<Soccer_player> team)
 void display_guy( Soccer_player *guy)
 {
 
-    /*printf("Name: %s %s\nBirth data: %d/%d/%d\n", guy->f_name,
-        guy->l_name, guy->birth_month, guy->birth_day,
-        guy->birth_year);*/
-}
-
-vector<Soccer_player> double_vec(vector<Soccer_player> &vec)
-{
-  int size = vec.size() * 2;
-  vector<Soccer_player> ret_vec(size);
-
-  for(int i = 0; i < vec.size(); i++)
-    ret_vec[i] = vec[i];
-
-  return ret_vec;
+  /*printf("Name: %s %s\nBirth data: %d/%d/%d\n", guy->f_name,
+      guy->l_name, guy->birth_month, guy->birth_day,
+      guy->birth_year);*/
+  cout << "Name: " << guy->f_name << " " << guy->l_name << endl;
+  cout << "Birth date: " << guy->birth_month << "/" << guy->birth_day
+       << "/" << guy->birth_year << endl;
 }
