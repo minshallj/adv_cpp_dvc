@@ -100,6 +100,7 @@ int big_switch(Soccer_player **team, int &logical, int &max)
       my_search(*team, logical);
       break;
     case 6:
+      cout << "Nice time soccering with you" << endl;
       return 0;
   }
   return 1;
