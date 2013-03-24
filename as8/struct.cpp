@@ -110,12 +110,12 @@ void display(vector<Soccer_player>  &team)
 
 void display_sorted(vector<Soccer_player> team)
 {
-  /*sort(team.begin(), team.end(), soc_cmp);
+  sort(team.begin(), team.end(), soc_cmp);
 
   for(int i = 0; i < team.size(); i++) {
     display_guy(&team[i]);
   }
-*/}
+}
 
 
 int soc_cmp(const Soccer_player a, const Soccer_player b)
@@ -153,7 +153,8 @@ void display_guy( Soccer_player *guy)
 
 vector<Soccer_player> double_vec(vector<Soccer_player> &vec)
 {
-  vector<Soccer_player> ret_vec = ((int)(vec.size() * 2));
+  int size = vec.size() * 2;
+  vector<Soccer_player> ret_vec(size);
 
   for(int i = 0; i < vec.size(); i++)
     ret_vec[i] = vec[i];
