@@ -36,7 +36,7 @@ void my_search(Soccer_player *team, int logical);
 
 int main()
 {
-  int size = 0, fill = 10, max = 10;
+  int size = 0, fill = 3, max = 3;
 
   Soccer_player *team = new Soccer_player[max];
 
@@ -136,23 +136,31 @@ int soc_cmp(const void * a, const void * b)
 
 
 void my_search(Soccer_player *team, int logical)
-{/*
-  string temp;
+{
+  string stemp;
   Soccer_player guy, *found = 0;//set to null
 
-  sort(team.begin(), team.end(), soc_cmp);
-  cin >> temp;
+  Soccer_player *temp = new Soccer_player[logical];
+    for(int i = 0; i < logical; i++)
+      temp[i] = team[i];
+  qsort(temp, logical, sizeof(Soccer_player), soc_cmp);
+
+  cout << "Enter name: ";
+  cin >> stemp;
   
-  while(temp != "//"){
-    guy.l_name = temp;
-    found = bsearch(&guy, &team[0], team.size(), sizeof(Soccer_player), 
-                    *soc_cmp_v);
+  while(stemp != "//"){
+    guy.l_name = stemp;
+    found = (Soccer_player*)bsearch(&guy, temp, logical, sizeof(Soccer_player), 
+            soc_cmp);
     if(found == 0)
       cout << "Not found" << endl;
     else
       display_guy(found);
+
+    cout << "Enter name: ";
+    cin >> stemp;
   }
-*/}
+}
 
 void display_guy( Soccer_player *guy)
 {
