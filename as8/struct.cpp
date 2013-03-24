@@ -6,9 +6,21 @@
 // user input soccer player
 
 #include <iostream>
-#include <vector.h>
+#include <vector>
+#include <algorithm>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
+
+typedef struct
+{
+  string l_name;
+  string f_name;
+  int birth_month;
+  int birth_day;
+  int birth_year;
+}Soccer_player;
 
 //function prototypes
 void fill_player(vector<Soccer_player> &guy, int n = 1);
@@ -19,14 +31,18 @@ int soc_cmp(const Soccer_player a, const Soccer_player b);
 int soc_cmp_v(const void * a, const void * b);
 void display_guy(const Soccer_player &guy);
 
-typedef struct
-{
-  string l_name;
-  string f_name;
-  int birth_month;
-  int birth_day;
-  int birth_year;
-}Soccer_player;
+
+//function prototypes
+void fill_player(vector<Soccer_player> &guy, int n = 1);
+int big_switch(vector<Soccer_player> &team);
+void display(vector<Soccer_player> const &team);
+void display_sorted(vector<Soccer_player> team);
+int soc_cmp(const Soccer_player a, const Soccer_player b);
+int soc_cmp_v(const void * a, const void * b);
+void display_guy(const Soccer_player &guy);
+void my_search(vector<Soccer_player> team);
+
+
 
 int main()
 {
@@ -58,7 +74,7 @@ void fill_player(vector<Soccer_player> &guy, int n)
 
 }
 
-void big_switch(vector<Soccer_player> &team)
+int big_switch(vector<Soccer_player> &team)
 {
   int choice;
 
@@ -94,9 +110,7 @@ void big_switch(vector<Soccer_player> &team)
 void display(vector<Soccer_player> const &team)
 {
   for(int i = 0; i < guy.size(); i++) {
-    printf("Guy #%d\nName: %s %s\nBirth data: %d/%d/%d\n", i, team[i].f_name,
-        team[i].l_name, team[i].birth_month, team[i].birth_day,
-        team[i].birth_year);
+    display_guy(team[i]);
   }
 }
 
@@ -105,15 +119,15 @@ void display_sorted(vector<Soccer_player> team)
 {
   sort(team.begin(), team.end(), soc_cmp);
 
-  for(int i = 0; i < guy.size(); i++) {
-    print_guy(team[i]);
+  for(int i = 0; i < team.size(); i++) {
+    display_guy(team[i]);
   }
 }
 
 
 int soc_cmp(const Soccer_player a, const Soccer_player b)
 {
-  return a.l_name < b.l_name;
+  return a.l_name - b.l_name;
 }
 
 int soc_cmp_v(const void * a, const void * b)
@@ -143,7 +157,7 @@ void my_search(vector<Soccer_player> team)
 void display_guy(const Soccer_player &guy)
 {
 
-    printf("Guy #%d\nName: %s %s\nBirth data: %d/%d/%d\n", i, guy.f_name,
+    printf("Name: %s %s\nBirth data: %d/%d/%d\n", guy.f_name,
         guy.l_name, guy.birth_month, guy.birth_day,
         guy.birth_year);
 }
