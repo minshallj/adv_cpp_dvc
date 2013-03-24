@@ -29,7 +29,7 @@ void fill_player(Soccer_player **guy, int &size, int &max, int n = 1);
 int big_switch(Soccer_player **team, int &logical, int &max);
 void display(Soccer_player *team, int logical);
 void display_sorted(Soccer_player *team, int logical);
-int soc_cmp(const Soccer_player a, const Soccer_player b);
+int soc_cmp(const void * a, const void * b);
 void display_guy(Soccer_player *guy);
 void my_search(Soccer_player *team, int logical);
 
@@ -60,6 +60,7 @@ void fill_player(Soccer_player **guy, int &size, int &max, int n)
       Soccer_player *temp = new Soccer_player[max * 2];
       for(int j = 0; j < max; j++)
         temp[j] = (*guy)[j];
+      //delete [] *guy;
       max *= 2;
       *guy = temp;
     }
@@ -117,17 +118,20 @@ void display_sorted(Soccer_player *team, int logical)
   Soccer_player *temp = new Soccer_player[logical];
   for(int i = 0; i < logical; i++)
     temp[i] = team[i];
-  sort(temp, temp + logical, soc_cmp);
+  qsort(temp, logical, sizeof(Soccer_player), soc_cmp);
 
   for(int i = 0; i < logical; i++) {
     display_guy(&temp[i]);
   }
+
+  //delete [] temp;
 }
 
 
-int soc_cmp(const Soccer_player a, const Soccer_player b)
+int soc_cmp(const void * a, const void * b)
 {
-  return strcmp(&(a.l_name[0]), &(b.l_name[0]));
+  return (*(Soccer_player*)a).l_name.compare((*(Soccer_player*)b).l_name);
+
 }
 
 
