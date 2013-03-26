@@ -34,9 +34,9 @@ void display_guy(Soccer_player *guy);
 void my_search(Soccer_player *team, int logical);
 
 
-int main()
+int main(int argc, char * argv[])
 {
-  int size = 0, fill = 3, max = 3;
+  int size = 0, fill = argc > 1 ? atoi(argv[1]) : 10, max = argc > 1 ? atoi(argv[1]) : 10;
 
   Soccer_player *team = new Soccer_player[max];
 
