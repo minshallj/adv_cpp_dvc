@@ -10,7 +10,7 @@ int main()
 {
 	char input[256];
 	while(1) {
-		cout << "please input string: ";
+		cout << endl << "please input string[-1 stops]: ";
 		cin.getline(input, 255);
 
 		if(strcmp(input, "-1") == 0)
@@ -19,12 +19,17 @@ int main()
 			cout << "yes it is a palindrome";
 		else
 			cout << "that is not a palindrome";
-		cout  << endl <<"-1 to stop, or palindrome to continue"<< endl;
 	}
 	cout << "Thank you for doing" << endl;
 }
 
-
+/*
+ if the size is one, then it's a palindrome
+ if there's just two left and they are the same its a palindrome
+ otherwise as long as the first and last character equal eachother,
+ call recursivley returning is_pal of index 1, to the second to last
+ character.
+*/
 int is_pal(string str)
 {
 	if(str.size() == 1)

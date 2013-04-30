@@ -17,6 +17,16 @@ int main()
 	cout << endl << "The gcf is " << gcf(num1, num2) << endl;
 }
 
+/*
+ either 0 was passed in, or it got down to a modulus
+ with the number 1 which returns 0, then 1 must be
+ the lowest common factor
+ otherwise modulo the last divisor with the current,
+ then check if the remainder was 0 return the divisor
+ otherwise call recursivley with the remainder as the
+ current divisor, and the current divisor as the last
+ divisor
+*/
 int gcf(int cur_divisor, int last_divisor)
 {
 	int remainder;
