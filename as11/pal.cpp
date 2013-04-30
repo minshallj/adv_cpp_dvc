@@ -6,14 +6,14 @@ using namespace std;
 
 int is_pal(string str);
 
-int main() 
+int main()
 {
-	string input;
+	char input[256];
 	while(1) {
 		cout << "please input string: ";
-		cin >> input;
+		cin.getline(input, 255);
 
-		if(input == "-1")
+		if(strcmp(input, "-1") == 0)
 			break;
 		if(is_pal(input))
 			cout << "yes it is a palindrome";
