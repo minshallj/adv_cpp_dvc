@@ -48,40 +48,46 @@ int main(int argc, char * argv[]) {
 entry *add_num(entry * lst)
 {
   int num;
-  entry last, *head = lst, *new_num;
+  entry *last, *head = lst, *new_num;
 
   cout << "Enter number to add: ";
-  cin >> num; 
+  cin >> num;
 
   //fist element to add
-  if (lst == 0) { 
+  if (lst == 0) {
     lst = new entry;
     lst->number = num;
     lst->next = 0;
     return lst;
-  } 
+  }
 
   // allocate and populate
   new_num = new entry;
   new_num->number = num;
+  new_num->next = 0;
   // already smallest num set new num's next to head
   // and return address of new num
   if (lst->number > num) {
     new_num->next = head;
     return new_num;
-  } else { 
-    // itierate through until holding the last number smaller in last
-    // and the next number in lst (which now looks like its not the best name
+  } else {
+    // iterate through until holding the last number smaller in last
+    // and the next number in lst (which now looks like its not the best name)
+    last = lst;
     while(lst->next && lst->number < num) {
-      last = *lst;
-      lst = lst->next; 
+      last = lst;
+      lst = lst->next;
     }
     // point last to new_num, and new_num to lst
-    last.next = new_num;
-    new_num->next = lst;
+    if(!lst->next) //already at end
+       lst->next = new_num;
+    else {
+        new_num->next = lst->next;
+        lst->next = new_num;
+    }
   }
   // should only happen if number was not first num in sequence
-  return head; 
+  return head;
 }
 void delete_num(entry * lst)
 {
@@ -106,10 +112,10 @@ void display(entry * lst)
 {
   int i = 0;
   while(lst->next) {
-    if (++i % 5 == 0 ) cout << endl;
+    if (i++ % 5 == 0 ) cout << endl;
 
     cout << lst->number << ", ";
     lst = lst->next;
   }
-  cout << endl;
+  cout << lst->number << endl;
 }
