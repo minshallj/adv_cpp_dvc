@@ -18,7 +18,7 @@ int main(int argc, char * argv[]) {
 
   while (1) {
     cout << "Enter choice:\n(1) Add a number\n(2) Delete a number\n(3) Search"
-	<< " for a number\n(4) Display list\n\n$ ";
+	<< " for a number\n(4) Display list\n(5) Exit\n\n$ ";
     cin >> choice;
     switch(choice){
       case 1:
