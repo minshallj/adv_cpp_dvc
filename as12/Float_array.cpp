@@ -10,25 +10,8 @@
 // returns lowest value
 // returns average
 #include <iostream>
+#include "Float_array.h"
 using namespace std;
-
-class Float_array{
-  public:
-    Float_array(int);
-    ~Float_array();
-
-    void add_member(float, int);
-    float return_member(int);
-
-    float max();
-    float min();
-    float mean();
-  protected:
-    float * arr;
-    int allocated_len, filled_len;
-
-    void grow_array();
-};
 
 Float_array::Float_array(int n)
 {
@@ -111,7 +94,24 @@ float Float_array::mean()
         return 0;
 
     for(int i = 0; i < filled_len; i++)
-        sum += arr[i]
+        sum += arr[i];
 
-    return sum / (float) filled_len;
+    return (sum / (float) filled_len);
+}
+
+void Float_array::grow_array()
+{
+    float *old = arr;
+
+    allocated_len *= 2;
+    arr = new float[allocated_len];
+    for(int i = 0; i < filled_len; i++)
+        arr[i] = old[i];
+
+    delete []old;
+}
+
+int Float_array::get_fill_len()
+{
+    return filled_len;
 }
