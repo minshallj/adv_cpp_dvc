@@ -10,6 +10,7 @@
 // returns lowest value
 // returns average
 #include <iostream>
+#include <stdlib.h>
 #include "Float_array.h"
 using namespace std;
 
@@ -81,6 +82,8 @@ float Float_array::min()
     for(int i = 1; i < filled_len; i++)
         if (tmp > arr[i])
             tmp = arr[i];
+
+    return tmp;
 }
 
 /*

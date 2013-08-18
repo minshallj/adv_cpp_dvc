@@ -308,7 +308,6 @@ void changeRecord(fstream &invFile)
 void searchbyname(fstream & invFile)
 {
     long recNum =0;
-    long foundNum;
     bool found = false;
     Inventory record;
     char toFind[30];

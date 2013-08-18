@@ -1,6 +1,7 @@
 // jacob minshall
 // pal.cpp
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 
