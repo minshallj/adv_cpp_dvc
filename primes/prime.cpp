@@ -6,8 +6,13 @@
 #include <strings.h>
 
 
-void fill_arr(int *arr, int &size, int max_size)
+int fill_arr(int *arr, int max_size)
 {
+	int size = 0;
+
+	if (max_size <= 2)
+		return 0;
+
 	arr[size++] = 2;
 	for(int i = 3; i < max_size; i++){
 		for(int j = 2; j < i; j++){
@@ -19,6 +24,8 @@ void fill_arr(int *arr, int &size, int max_size)
 			}
 		}
 	}
+
+	return size;
 }
 
 void print_arr(const int *arr, int size)

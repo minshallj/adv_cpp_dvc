@@ -33,14 +33,16 @@ int main(int argc, char * argv[])
 	/* run both, and bzero the array in between to ensure the second
 	 * primes function fills the array properly */
 	if (type == 0) {
-		fill_arr(arr, index, max_size);
+		index = fill_arr(arr, max_size);
 		print_arr(arr, index);
+
+		printf("\n");
 
 		bzero(arr, max_size * sizeof(int));
 		index = gesundheit_prime(arr, max_size);
 		print_arr(arr, index);
 	} else if (type == 1) {
-		fill_arr(arr, index, max_size);
+		index = fill_arr(arr, max_size);
 		print_arr(arr, index);
 	} else if (type == 2) {
 		index = gesundheit_prime(arr, max_size);
