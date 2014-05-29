@@ -28,6 +28,9 @@ int main(int argc, char * argv[])
 		}
 	}
 
+	/* allow matching up to actual max_size */
+	max_size += 1;
+
 	arr = (int*) malloc(max_size * sizeof(int));
 
 	/* run both, and bzero the array in between to ensure the second
